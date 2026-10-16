@@ -14,8 +14,13 @@ defaultTheme = "auto"
     TocOpen = false         # 目录默认折叠
     comments = false        # 暂时关评论
 
+    [[params.socialIcons]]
+        name = "github"
+        url = "https://github.com/E65nonsense"
+        title = "前往我的 GITHUB 主页"
+
 [params.homeInfoParams]
-    Title = "你好，欢迎来到我的博客"
+    Title = "有朋自远方来，不亦乐乎！"
 
 [[menu.main]]
     name = "生活"
@@ -24,12 +29,8 @@ defaultTheme = "auto"
 [[menu.main]]
     name = "文章"
     url = "posts/"
-    weight = 10
+    weight = 11
 [[menu.main]]
     name = "关于"
     url = "about/"
     weight = 20
-
-[[params.socialIcons]]
-    name = "E65nonsense"
-    url = "https://github.com/E65nonsense"
