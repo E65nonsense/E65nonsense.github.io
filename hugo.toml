@@ -1,4 +1,35 @@
-baseURL = 'https://example.org/'
-locale = 'en-us'
-title = 'My New Hugo Project'
+baseURL = 'https://E65nonsense.github.io/'
+locale = 'zh-cn'
+title = 'E65nonsense 的博客'
 theme = "PaperMod"
+defaultTheme = "auto"
+
+[params]
+    ShowReadingTime = true
+    ShowBreadCrumbs = true
+    ShowCodeCopyButtons = true
+    ShowShareButtons = false
+    ShowPostNavLinks = true
+    ShowToc = true          # 文章页显示目录
+    TocOpen = false         # 目录默认折叠
+    comments = false        # 暂时关评论
+
+[params.homeInfoParams]
+    Title = "你好，欢迎来到我的博客"
+
+[[menu.main]]
+    name = "生活"
+    url = "life/"
+    weight = 10
+[[menu.main]]
+    name = "文章"
+    url = "posts/"
+    weight = 10
+[[menu.main]]
+    name = "关于"
+    url = "about/"
+    weight = 20
+
+[[params.socialIcons]]
+    name = "E65nonsense"
+    url = "https://github.com/E65nonsense"
