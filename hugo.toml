@@ -21,11 +21,6 @@ defaultTheme = "auto"
         name = "github"
         url = "https://github.com/E65nonsense"
         title = "前往我的 GITHUB 主页"
-
-    [[params.socialIcons]]
-        name = "wechat"
-        url = "/support/"
-        title = "请我喝杯奶茶"
         
     [[params.socialIcons]]
         name = "neteasecloudmusic"
@@ -38,9 +33,9 @@ defaultTheme = "auto"
         title = "或者在 B 站上关注我"
 
     [[params.socialIcons]]
-        name = "buymeacoffee"
-        url = "https://www.buymeacoffee.com/e65nonsense"
-        title = "当然你也可以选择用金钱淹没我"
+        name = "wechat"
+        url = "/support/"
+        title = "当然你也可以请我喝杯奶茶！"
 
 [params.homeInfoParams]
     Title = "有朋自远方来，不亦乐乎！"
