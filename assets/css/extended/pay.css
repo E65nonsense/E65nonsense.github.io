@@ -10,12 +10,9 @@
     text-align: center;
     background: var(--entry);
     border: 1px solid var(--tertiary);
-    border-radius: calc(var(--radius) * 2);
-}
-
-/* 微信绿描边，作为一点点品牌提示 */
-.md-content .pay-card {
+    /* 顶部一道微信绿 */
     border-top: 4px solid #07c160;
+    border-radius: calc(var(--radius) * 2);
 }
 
 .md-content .pay-card img {
