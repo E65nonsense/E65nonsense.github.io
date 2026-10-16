@@ -5,6 +5,9 @@ theme = "PaperMod"
 defaultTheme = "auto"
 
 [params]
+    # 首页/列表页只显示 posts 栏目下的文章，避免 "关于我" 这类页面混进列表
+    mainSections = ["posts"]
+
     ShowReadingTime = true
     ShowBreadCrumbs = true
     ShowCodeCopyButtons = true
@@ -18,6 +21,26 @@ defaultTheme = "auto"
         name = "github"
         url = "https://github.com/E65nonsense"
         title = "前往我的 GITHUB 主页"
+
+    [[params.socialIcons]]
+        name = "wechat"
+        url = "/support/"
+        title = "请我喝杯奶茶"
+        
+    [[params.socialIcons]]
+        name = "neteasecloudmusic"
+        url = "https://music.163.com/#/user/home?id=329601548"
+        title = "来欣赏我的超绝歌品！"
+        
+    [[params.socialIcons]]
+        name = "bilibili"
+        url = "https://space.bilibili.com/445538963"
+        title = "或者在 B 站上关注我"
+
+    [[params.socialIcons]]
+        name = "buymeacoffee"
+        url = "https://www.buymeacoffee.com/e65nonsense"
+        title = "当然你也可以选择用金钱淹没我"
 
 [params.homeInfoParams]
     Title = "有朋自远方来，不亦乐乎！"

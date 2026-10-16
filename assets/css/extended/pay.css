@@ -1,0 +1,50 @@
+/* ==========================================================
+   收款码页面样式（/support/）
+   PaperMod 会自动引入 assets/css/extended/ 下的所有 css
+   ========================================================== */
+
+.md-content .pay-card {
+    margin: 2rem auto 1.5rem auto;
+    padding: 1.5rem 1.5rem 1rem 1.5rem;
+    max-width: 340px;
+    text-align: center;
+    background: var(--entry);
+    border: 1px solid var(--tertiary);
+    border-radius: calc(var(--radius) * 2);
+}
+
+/* 微信绿描边，作为一点点品牌提示 */
+.md-content .pay-card {
+    border-top: 4px solid #07c160;
+}
+
+.md-content .pay-card img {
+    display: block;
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    margin: 0 auto !important;
+    padding: 8px;
+    background: #ffffff;
+    border-radius: var(--radius);
+}
+
+.md-content .pay-card figcaption {
+    margin-top: 1rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-align: center;
+}
+
+.md-content .pay-card figcaption p {
+    margin: 0.35rem 0 0 0;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--secondary);
+}
+
+/* 深色模式下让白色二维码板不要那么刺眼 */
+[data-theme="dark"] .md-content .pay-card img {
+    background: #f2f2f2;
+}
