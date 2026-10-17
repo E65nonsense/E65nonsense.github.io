@@ -14,6 +14,9 @@
 
 .giscus {
     margin-bottom: 1rem;
+    /* 占位高度：空元素高度为 0 时 IntersectionObserver 不会判定为相交，
+       懒加载永远不会触发；同时避免 iframe 加载后页面跳动 */
+    min-height: 180px;
 }
 
 /* Waline 容器：由客户端脚本接管 */
