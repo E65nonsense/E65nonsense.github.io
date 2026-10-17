@@ -1,11 +1,43 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>My New Hugo Project</title>
+    <title>E65nonsense 的博客</title>
     <link>http://localhost:1313/</link>
-    <description>Recent content on My New Hugo Project</description>
+    <description>Recent content on E65nonsense 的博客</description>
     <generator>Hugo</generator>
-    <language>en-us</language>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 17 Oct 2026 00:01:03 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>关于我</title>
+      <link>http://localhost:1313/about/</link>
+      <pubDate>Sat, 17 Oct 2026 00:01:03 +0800</pubDate>
+      <guid>http://localhost:1313/about/</guid>
+      <description>&lt;p&gt;你好，我是 E65nonsense&lt;/p&gt;
+&lt;p&gt;来自北京航空航天大学计算机学院&lt;/p&gt;
+&lt;p&gt;这里是我的博客，虽然现在看起来还是毛坯房，但我还在不断学习，这里会越来越丰富的！&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>支持</title>
+      <link>http://localhost:1313/support/</link>
+      <pubDate>Sat, 17 Oct 2026 00:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/support/</guid>
+      <description>&lt;p&gt;可以扫描下面的二维码，请我喝一杯奶茶 ☕&lt;/p&gt;
+&lt;p&gt;资金支持不代表作者会开发更多作品，因为我还没学会&lt;/p&gt;
+&lt;p&gt;但是你的每一份支持，我都会记在心里 🌱&lt;/p&gt;
+&lt;figure class=&#34;align-center pay-card&#34;&gt;
+    &lt;img loading=&#34;lazy&#34; src=&#34;http://localhost:1313/images/wechat-pay.jpg#center&#34;
+         alt=&#34;微信收款码&#34;/&gt; &lt;figcaption&gt;
+            微信收款码
+        &lt;/figcaption&gt;
+&lt;/figure&gt;</description>
+    </item>
+    <item>
+      <title>Hello</title>
+      <link>http://localhost:1313/posts/hello/</link>
+      <pubDate>Fri, 16 Oct 2026 23:24:37 +0800</pubDate>
+      <guid>http://localhost:1313/posts/hello/</guid>
+      <description>&lt;p&gt;&lt;em&gt;我只是来打酱油的！&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
   </channel>
 </rss>

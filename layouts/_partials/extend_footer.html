@@ -1,0 +1,7 @@
+{{- /* Footer custom content area start */ -}}
+{{- /* 首页标题逐字浮现脚本 */ -}}
+{{- with resources.Get "js/animations.js" }}
+{{- $js := . | minify | fingerprint }}
+<script defer src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
+{{- end }}
+{{- /* Footer custom content area end */ -}}

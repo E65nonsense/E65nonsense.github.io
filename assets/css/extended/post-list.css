@@ -1,0 +1,218 @@
+/* ==========================================================================
+   post-list.css
+   文章列表新样式：左侧日期栏 + 细分割线（无卡片边框）
+   ========================================================================== */
+
+.post-entry {
+    position: relative;
+    display: grid;
+    grid-template-columns: 9rem minmax(0, 1fr);
+    grid-template-areas:
+        "meta head"
+        "meta body";
+    align-items: start;
+    column-gap: 1.5rem;
+    row-gap: 0.4rem;
+
+    /* 去掉方块感 */
+    margin-bottom: 0;
+    padding: 1.3rem 0.6rem 1.35rem 0.85rem;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--border);
+    border-radius: 0;
+
+    transition: border-color var(--dur-mid) var(--ease-soft);
+}
+
+/* hover 时左侧滑入的强调竖条 */
+.post-entry::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 1.15rem;
+    bottom: 1.2rem;
+    width: 2px;
+    border-radius: 2px;
+    background: var(--accent);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform var(--dur-fast) var(--ease-soft);
+    pointer-events: none;
+}
+
+.post-entry .entry-header {
+    grid-area: head;
+    transition: transform var(--dur-mid) var(--ease-soft);
+}
+
+.post-entry .entry-content {
+    grid-area: body;
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.65;
+    transition: transform var(--dur-mid) var(--ease-soft);
+}
+
+/* 日期 + 阅读时长，放到左侧栏 */
+.post-entry .entry-footer {
+    grid-area: meta;
+    margin: 0;
+    padding-top: 0.15rem;
+    font-size: 12.5px;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    color: var(--secondary);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color var(--dur-mid) var(--ease-soft);
+}
+
+/* 标题 */
+.post-entry .entry-header h2 {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: 0.01em;
+}
+
+/* 标题下划线：从左向右滑入 */
+.post-entry .entry-header h2::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur-mid) var(--ease-soft);
+    pointer-events: none;
+}
+
+/* 最后一条不画分割线 */
+.post-entry:last-of-type {
+    border-bottom: 0;
+}
+
+/* 主题自带的卡片式 hover 位移会拉开分割线，这里取消 */
+.post-entry:hover,
+.post-entry:focus-within {
+    transform: none;
+    border-color: var(--tertiary);
+}
+
+.post-entry:active {
+    transform: scale(0.997);
+}
+
+/* --------------------------------------------------------------------------
+   Hover / 键盘聚焦
+   -------------------------------------------------------------------------- */
+
+@media (hover: hover) and (pointer: fine) {
+
+    .post-entry:hover .entry-header,
+    .post-entry:hover .entry-content {
+        transform: translateX(4px);
+    }
+
+    .post-entry:hover .entry-footer {
+        color: var(--primary);
+    }
+
+    .post-entry:hover .entry-header h2::after {
+        transform: scaleX(1);
+    }
+
+    .post-entry:hover::before {
+        transform: scaleY(1);
+    }
+}
+
+/* 键盘 Tab 到整条链接时也给同样的反馈 */
+.post-entry:focus-within .entry-header,
+.post-entry:focus-within .entry-content {
+    transform: translateX(4px);
+}
+
+.post-entry:focus-within .entry-footer {
+    color: var(--primary);
+}
+
+.post-entry:focus-within .entry-header h2::after {
+    transform: scaleX(1);
+}
+
+.post-entry:focus-within::before {
+    transform: scaleY(1);
+}
+
+/* --------------------------------------------------------------------------
+   移动端：单列，日期移到标题上方
+   -------------------------------------------------------------------------- */
+
+@media screen and (max-width: 768px) {
+    .post-entry {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            "meta"
+            "head"
+            "body";
+        column-gap: 0;
+        row-gap: 0.28rem;
+        padding: 1.1rem 0.4rem 1.15rem 0.75rem;
+    }
+
+    .post-entry .entry-header h2 {
+        font-size: 20px;
+    }
+
+    .post-entry .entry-footer {
+        padding-top: 0;
+        font-size: 12px;
+        color: var(--secondary);
+    }
+
+    .post-entry:hover .entry-header,
+    .post-entry:hover .entry-content,
+    .post-entry:focus-within .entry-header,
+    .post-entry:focus-within .entry-content {
+        transform: none;
+    }
+
+    .post-entry::before {
+        top: 1rem;
+        bottom: 1.05rem;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   减少动态效果
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .post-entry,
+    .post-entry::before,
+    .post-entry .entry-header,
+    .post-entry .entry-content,
+    .post-entry .entry-footer,
+    .post-entry .entry-header h2::after {
+        transition: none;
+        transform: none !important;
+    }
+
+    .post-entry:hover .entry-header h2::after,
+    .post-entry:focus-within .entry-header h2::after {
+        transform: scaleX(1);
+    }
+}

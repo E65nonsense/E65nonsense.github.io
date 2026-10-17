@@ -1,0 +1,313 @@
+/* ==========================================================================
+   animations.css
+   1. 首页标题「逐字浮现」
+   2. 全站按钮 / 链接的交互反馈（hover / active / focus-visible）
+   ========================================================================== */
+
+:root {
+    --ease-soft: cubic-bezier(0.2, 0.8, 0.2, 1);
+    --dur-fast: 160ms;
+    --dur-mid: 220ms;
+    /* 强调色：默认跟随主题前景色（黑白）。
+       想换成彩色，把下面这行改成比如  --accent: #07c160;  即可 */
+    --accent: var(--primary);
+}
+
+/* --------------------------------------------------------------------------
+   1. 首页标题逐字浮现
+   说明：.char 由 assets/js/animations.js 动态插入。
+   没有 JS 时根本不存在 .char，标题正常静态显示（渐进增强）。
+   -------------------------------------------------------------------------- */
+
+.home-info .entry-header h1 .char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(0.35em);
+    filter: blur(4px);
+    animation: char-rise 600ms var(--ease-soft) forwards;
+    animation-delay: calc(var(--i, 0) * 45ms + 150ms);
+    will-change: transform, opacity, filter;
+}
+
+@keyframes char-rise {
+    0% {
+        opacity: 0;
+        transform: translateY(0.35em);
+        filter: blur(4px);
+    }
+    60% {
+        opacity: 1;
+        filter: blur(0.4px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+/* --------------------------------------------------------------------------
+   2. 键盘焦点环（鼠标点击不会出现，只有 Tab 导航才会显示）
+   -------------------------------------------------------------------------- */
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+/* --------------------------------------------------------------------------
+   3. 顶部导航
+   -------------------------------------------------------------------------- */
+
+.header-nav .logo a {
+    transition: color var(--dur-mid) var(--ease-soft),
+        transform var(--dur-fast) var(--ease-soft);
+}
+
+.menu a {
+    position: relative;
+    transition: color var(--dur-mid) var(--ease-soft);
+}
+
+/* 下划线从中间向两侧展开（激活项保留主题自带的下划线，不叠加） */
+.menu a:not(.active)::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0.85rem;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform var(--dur-fast) var(--ease-soft);
+    pointer-events: none;
+}
+
+/* 主题切换按钮 */
+.theme-toggle {
+    border-radius: 50%;
+    transition: transform var(--dur-fast) var(--ease-soft),
+        background-color var(--dur-mid) var(--ease-soft);
+}
+
+/* --------------------------------------------------------------------------
+   4. 社交图标
+   -------------------------------------------------------------------------- */
+
+.social-icons a {
+    border-radius: 50%;
+    transition: transform var(--dur-fast) var(--ease-soft),
+        color var(--dur-mid) var(--ease-soft),
+        background-color var(--dur-mid) var(--ease-soft);
+}
+
+/* --------------------------------------------------------------------------
+   5. 文章页内的按钮 / 链接
+   -------------------------------------------------------------------------- */
+
+/* 标签 */
+.post-tags a {
+    border-radius: var(--radius);
+    transition: color var(--dur-mid) var(--ease-soft),
+        background-color var(--dur-mid) var(--ease-soft),
+        transform var(--dur-fast) var(--ease-soft);
+}
+
+/* 上一篇 / 下一篇 */
+.paginav a {
+    transition: background-color var(--dur-mid) var(--ease-soft),
+        transform var(--dur-fast) var(--ease-soft);
+}
+
+/* 目录条目 */
+.toc a {
+    border-radius: 4px;
+    transition: color var(--dur-mid) var(--ease-soft),
+        padding-inline-start var(--dur-fast) var(--ease-soft),
+        box-shadow var(--dur-mid) var(--ease-soft);
+}
+
+/* 列表页分页 */
+.pagination a {
+    display: inline-block;
+    transition: color var(--dur-mid) var(--ease-soft),
+        transform var(--dur-fast) var(--ease-soft);
+}
+
+/* 返回顶部 */
+.top-link {
+    transition: visibility 0.3s, opacity 0.3s cubic-bezier(0.4, 0, 1, 1),
+        transform var(--dur-fast) var(--ease-soft),
+        background-color var(--dur-mid) var(--ease-soft),
+        color var(--dur-mid) var(--ease-soft),
+        box-shadow var(--dur-mid) var(--ease-soft);
+}
+
+/* 复制代码 */
+.copy-code {
+    cursor: pointer;
+    transition: background-color var(--dur-mid) var(--ease-soft),
+        transform var(--dur-fast) var(--ease-soft);
+}
+
+/* 正文里的普通链接 */
+.md-content a:not(.anchor) {
+    transition: color var(--dur-mid) var(--ease-soft),
+        text-underline-offset var(--dur-mid) var(--ease-soft);
+}
+
+/* 通用的 .button（搜索、terms 等） */
+.button {
+    transition: color var(--dur-mid) var(--ease-soft),
+        border-color var(--dur-mid) var(--ease-soft),
+        background-color var(--dur-mid) var(--ease-soft),
+        transform var(--dur-fast) var(--ease-soft);
+}
+
+/* --------------------------------------------------------------------------
+   6. Hover 效果：只在真正支持 hover 的设备上生效
+      （手机点完不会卡在 hover 状态）
+   -------------------------------------------------------------------------- */
+
+@media (hover: hover) and (pointer: fine) {
+
+    .header-nav .logo a:hover {
+        color: var(--accent);
+        transform: translateX(2px);
+    }
+
+    .menu a:not(.active):hover {
+        color: var(--accent);
+    }
+
+    .menu a:not(.active):hover::after {
+        transform: scaleX(1);
+    }
+
+    .theme-toggle:hover {
+        transform: scale(1.12) rotate(12deg);
+        background-color: var(--code-bg);
+    }
+
+    .social-icons a:hover {
+        transform: translateY(-2px) scale(1.15);
+        color: var(--accent);
+        background-color: var(--code-bg);
+    }
+
+    .post-tags a:hover {
+        color: var(--theme);
+        background-color: var(--primary);
+    }
+
+    .paginav a:hover {
+        background-color: var(--border);
+    }
+
+    .toc a:hover {
+        color: var(--primary);
+        padding-inline-start: 8px;
+        box-shadow: inset 2px 0 0 var(--accent);
+    }
+
+    .pagination a:hover {
+        color: var(--primary);
+    }
+
+    .top-link:hover {
+        transform: translateY(-3px);
+        background-color: var(--accent);
+        color: var(--theme);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+    }
+
+    .copy-code:hover {
+        background-color: rgba(130, 130, 130, 0.95);
+    }
+
+    .md-content a:not(.anchor):hover {
+        text-underline-offset: 0.25rem;
+    }
+
+    .button:hover {
+        border-color: var(--tertiary);
+    }
+}
+
+/* --------------------------------------------------------------------------
+   7. 按下反馈
+   -------------------------------------------------------------------------- */
+
+.header-nav .logo a:active {
+    transform: scale(0.97);
+}
+
+.theme-toggle:active {
+    transform: scale(0.9) rotate(0deg);
+}
+
+.social-icons a:active {
+    transform: scale(0.92);
+}
+
+.post-tags a:active {
+    transform: scale(0.96);
+}
+
+.paginav a:active {
+    transform: scale(0.98);
+}
+
+.pagination a:active {
+    transform: scale(0.96);
+}
+
+.top-link:active {
+    transform: translateY(0) scale(0.92);
+}
+
+.copy-code:active {
+    transform: scale(0.94);
+}
+
+.button:active {
+    transform: scale(0.96);
+}
+
+/* --------------------------------------------------------------------------
+   8. 尊重「减少动态效果」系统设置
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+    .home-info .entry-header h1 .char {
+        animation: none !important;
+        opacity: 1;
+        transform: none;
+        filter: none;
+    }
+
+    .menu a::after,
+    .theme-toggle,
+    .social-icons a,
+    .post-tags a,
+    .paginav a,
+    .toc a,
+    .pagination a,
+    .top-link,
+    .copy-code,
+    .md-content a:not(.anchor),
+    .button,
+    .header-nav .logo a,
+    .post-entry,
+    .post-entry .entry-header,
+    .post-entry .entry-content,
+    .post-entry .entry-footer {
+        transition: none;
+        transform: none !important;
+    }
+}

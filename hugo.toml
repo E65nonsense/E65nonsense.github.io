@@ -16,6 +16,7 @@ defaultTheme = "auto"
     ShowToc = true          # 文章页显示目录
     TocOpen = false         # 目录默认折叠
     comments = false        # 暂时关评论
+    DateFormat = "2006.01.02"   # 列表页左侧日期列用紧凑格式
 
     [[params.socialIcons]]
         name = "github"
