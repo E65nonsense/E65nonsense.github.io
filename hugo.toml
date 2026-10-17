@@ -26,7 +26,7 @@ defaultTheme = "auto"
         
     [[params.socialIcons]]
         name = "neteasecloudmusic"
-        url = "https://music.163.com/#/user/home?id=329601548"
+        url = "https://music.163.com/#/user?id=329601548"
         title = "来欣赏我的超绝歌品！"
         
     [[params.socialIcons]]
