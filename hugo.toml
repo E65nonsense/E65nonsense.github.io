@@ -1,4 +1,4 @@
-baseURL = 'https://E65nonsense.github.io/'
+﻿baseURL = 'https://E65nonsense.github.io/'
 locale = 'zh-cn'
 title = 'E65nonsense 的博客'
 theme = "PaperMod"
@@ -15,7 +15,8 @@ defaultTheme = "auto"
     ShowPostNavLinks = true
     ShowToc = true          # 文章页显示目录
     TocOpen = false         # 目录默认折叠
-    comments = false        # 暂时关评论
+    comments = true         # 开启评论（单篇可在 front matter 写 comments = false 关掉）
+    commentSystem = "giscus"    # waline = 任何人不用登录就能评论；giscus = 访客需用 GitHub 账号登录
     DateFormat = "2006.01.02"   # 列表页左侧日期列用紧凑格式
 
     [[params.socialIcons]]
@@ -53,3 +54,28 @@ defaultTheme = "auto"
     name = "关于"
     url = "about/"
     weight = 20
+
+# 评论区：giscus（基于 GitHub Discussions，无需服务器）
+# 访客需要 GitHub 账号才能评论
+[params.giscus]
+    repo = "E65nonsense/E65nonsense.github.io"
+    repoId = "R_kgDOVMSxrg"
+    category = "Announcements"
+    categoryId = "DIC_kwDOVMSxrs4DIwYY"
+    mapping = "pathname"        # 用文章路径匹配 discussion，改标题不影响
+    strict = 0
+    reactionsEnabled = 1
+    inputPosition = "top"
+    lang = "zh-CN"
+    title = "评论"
+
+# 评论区：Waline（可匿名评论，访客不需要任何账号）
+# 部署 Waline 服务端后，把地址填到 serverURL（末尾不要带 /）
+# 部署教程：https://waline.js.org/guide/get-started/
+[params.waline]
+    serverURL = ""              # 例: https://waline-xxxx.vercel.app
+    lang = "zh-CN"
+    login = "disable"           # disable = 不显示登录入口，只允许匿名评论
+    requiredMeta = ["nick"]     # 必填项只要求昵称；改成 ["nick","mail"] 可要求邮箱
+    pageSize = 10
+    title = "评论"

@@ -1,0 +1,45 @@
+/* 评论区（giscus） */
+
+.post-comments {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+}
+
+.post-comments-title {
+    margin: 0 0 1.25rem;
+    font-size: 1.3rem;
+    line-height: 1.3;
+}
+
+.giscus {
+    margin-bottom: 1rem;
+}
+
+/* Waline 容器：由客户端脚本接管 */
+.waline-host {
+    min-height: 120px;
+}
+
+.comments-error {
+    color: var(--secondary);
+    font-size: 0.95rem;
+}
+
+/* iframe 加载完成后由 giscus 自己撑开高度，这里只兜底最小高度 */
+.giscus iframe {
+    width: 100%;
+    min-height: 180px;
+    border: none;
+}
+
+@media screen and (max-width: 768px) {
+    .post-comments {
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+    }
+
+    .post-comments-title {
+        font-size: 1.15rem;
+    }
+}

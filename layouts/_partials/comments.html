@@ -1,0 +1,148 @@
+{{- /*
+  评论区，由 hugo.toml 的 [params] commentSystem 决定用哪一个：
+    waline  -> 任何人不用登录即可评论（需先部署 Waline 服务端）
+    giscus  -> 基于 GitHub Discussions，访客必须登录 GitHub
+    off     -> 不显示评论
+  单篇文章可在 front matter 写 comments = false 单独关闭。
+  两者都是滚动到附近才加载，避免拖慢首屏。
+*/ -}}
+{{- $system := site.Params.commentSystem | default "waline" -}}
+
+{{- if eq $system "waline" -}}
+{{- $w := site.Params.waline -}}
+{{- if not $w.serverURL -}}
+{{- warnf "waline: 请在 hugo.toml 的 [params.waline] 填入 serverURL（部署 Waline 后获得）" -}}
+{{- else -}}
+<section class="post-comments" id="comments">
+  <h2 class="post-comments-title">{{ $w.title | default "评论" }}</h2>
+  <div class="waline-host" id="waline"></div>
+</section>
+<script>
+  (function () {
+    var host = document.getElementById("waline");
+    if (!host || host.dataset.ready) return;
+
+    var config = {
+      el: host,
+      serverURL: {{ $w.serverURL | jsonify | safeJS }}.replace(/\/+$/, ""),
+      lang: {{ ($w.lang | default "zh-CN") | jsonify | safeJS }},
+      login: {{ ($w.login | default "disable") | jsonify | safeJS }},
+      requiredMeta: {{ ($w.requiredMeta | default (slice "nick")) | jsonify | safeJS }},
+      dark: {{ ($w.dark | default `html[data-theme="dark"]`) | jsonify | safeJS }},
+      pageSize: {{ $w.pageSize | default 10 }},
+      commentCount: false,
+      pageview: false,
+      search: false,
+      reaction: {{ $w.reaction | default false }}
+    };
+
+    function load() {
+      if (host.dataset.ready) return;
+      host.dataset.ready = "1";
+
+      var link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = "https://unpkg.com/@waline/client@3.16.1/dist/waline.css";
+      document.head.appendChild(link);
+
+      import("https://unpkg.com/@waline/client@3.16.1/dist/waline.js")
+        .then(function (mod) { mod.init(config); })
+        .catch(function (err) {
+          console.error("Waline 加载失败", err);
+          host.innerHTML = '<p class="comments-error">评论加载失败，请刷新页面重试。</p>';
+        });
+    }
+
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        if (entries.some(function (entry) { return entry.isIntersecting; })) {
+          io.disconnect();
+          load();
+        }
+      }, { rootMargin: "400px 0px" });
+      io.observe(host);
+    } else {
+      load();
+    }
+  })();
+</script>
+{{- end -}}
+
+{{- else if eq $system "giscus" -}}
+{{- $c := site.Params.giscus -}}
+{{- if and $c $c.repo $c.repoId $c.categoryId -}}
+{{- if or (eq $c.categoryId "REPLACE_ME") (eq $c.categoryId "") -}}
+{{- warnf "giscus: 请在 hugo.toml 的 [params.giscus] 填入从 https://giscus.app 获取的 categoryId" -}}
+{{- else -}}
+<section class="post-comments" id="comments">
+  <h2 class="post-comments-title">{{ $c.title | default "评论" }}</h2>
+  <div class="giscus"
+    data-repo="{{ $c.repo }}"
+    data-repo-id="{{ $c.repoId }}"
+    data-category="{{ $c.category | default "Comments" }}"
+    data-category-id="{{ $c.categoryId }}"
+    data-mapping="{{ $c.mapping | default "pathname" }}"
+    data-strict="{{ $c.strict | default 0 }}"
+    data-reactions-enabled="{{ $c.reactionsEnabled | default 1 }}"
+    data-emit-metadata="0"
+    data-input-position="{{ $c.inputPosition | default "top" }}"
+    data-lang="{{ $c.lang | default "zh-CN" }}"
+    data-loading="lazy">
+  </div>
+</section>
+<script>
+  (function () {
+    var el = document.querySelector('.giscus');
+    if (!el || el.dataset.ready) return;
+
+    function currentTheme() {
+      return document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+    }
+
+    function load() {
+      if (el.dataset.ready) return;
+      el.dataset.ready = '1';
+      var s = document.createElement('script');
+      s.src = 'https://giscus.app/client.js';
+      s.async = true;
+      s.crossOrigin = 'anonymous';
+      [
+        'repo', 'repoId', 'category', 'categoryId', 'mapping', 'strict',
+        'reactionsEnabled', 'inputPosition', 'lang', 'loading'
+      ].forEach(function (key) {
+        var attr = 'data-' + key.replace(/[A-Z]/g, function (m) { return '-' + m.toLowerCase(); });
+        s.setAttribute(attr, el.dataset[key]);
+      });
+      s.setAttribute('data-emit-metadata', '0');
+      s.setAttribute('data-theme', currentTheme());
+      el.appendChild(s);
+    }
+
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        if (entries.some(function (entry) { return entry.isIntersecting; })) {
+          io.disconnect();
+          load();
+        }
+      }, { rootMargin: '400px 0px' });
+      io.observe(el);
+    } else {
+      load();
+    }
+
+    document.addEventListener('click', function (event) {
+      if (!event.target.closest('#theme-toggle')) return;
+      setTimeout(function () {
+        var frame = document.querySelector('iframe.giscus-frame');
+        if (!frame || !frame.contentWindow) return;
+        frame.contentWindow.postMessage(
+          { giscus: { setConfig: { theme: currentTheme() } } },
+          'https://giscus.app'
+        );
+      }, 120);
+    });
+  })();
+</script>
+{{- end -}}
+{{- end -}}
+{{- end -}}

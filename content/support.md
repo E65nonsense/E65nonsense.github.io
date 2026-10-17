@@ -7,6 +7,7 @@ ShowToc = false
 ShowReadingTime = false
 ShowPostNavLinks = false
 ShowShareButtons = false
+comments = false
 +++
 
 可以扫描下面的二维码，请我喝一杯奶茶 ☕
