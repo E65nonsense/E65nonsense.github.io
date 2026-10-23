@@ -5,8 +5,9 @@ theme = "PaperMod"
 defaultTheme = "auto"
 
 [params]
-    # 首页/列表页只显示 posts 栏目下的文章，避免 "关于我" 这类页面混进列表
-    mainSections = ["posts"]
+    # 首页列表显示 posts 和 life 两个栏目下的文章；
+    # about / support 是顶层独立页面，不属于这两个 section，不会混进列表
+    mainSections = ["posts", "life"]
 
     ShowReadingTime = true
     ShowBreadCrumbs = true

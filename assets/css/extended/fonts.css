@@ -1,0 +1,54 @@
+/* ==========================================================================
+   fonts.css —— 仅替换英文字体（Maple Mono，拉丁子集）
+   中文字符不在字体文件里，浏览器会自动回退到后面的系统字体。
+   ========================================================================== */
+
+/* unicode-range 让浏览器只在这些字符上使用该字体，中文完全不触发下载/匹配 */
+@font-face {
+    font-family: "Maple Mono Web";
+    src: url("/fonts/MapleMono-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    unicode-range: U+0020-007E, U+00A0-00FF, U+2000-2011, U+2020-2025, U+2030-205E, U+2190-21FF, U+2500-257F, U+25A0-25FF, U+2B00-2BFF;
+}
+
+@font-face {
+    font-family: "Maple Mono Web";
+    src: url("/fonts/MapleMono-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+    unicode-range: U+0020-007E, U+00A0-00FF, U+2000-2011, U+2020-2025, U+2030-205E, U+2190-21FF, U+2500-257F, U+25A0-25FF, U+2B00-2BFF;
+}
+
+@font-face {
+    font-family: "Maple Mono Web";
+    src: url("/fonts/MapleMono-Italic.woff2") format("woff2");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+    unicode-range: U+0020-007E, U+00A0-00FF, U+2000-2011, U+2020-2025, U+2030-205E, U+2190-21FF, U+2500-257F, U+25A0-25FF, U+2B00-2BFF;
+}
+
+:root {
+    /* 英文优先 Maple Mono，中文及缺字回退到系统黑体 */
+    --font-latin: "Maple Mono Web", -apple-system, "Segoe UI", "PingFang SC",
+        "Microsoft YaHei", "Source Han Sans SC", sans-serif;
+    --font-code: "Maple Mono Web", ui-monospace, "Cascadia Code", Consolas,
+        "Courier New", monospace;
+}
+
+body {
+    font-family: var(--font-latin);
+}
+
+/* 代码块 / 行内代码同样使用（子集已含 Nerd Font 常用符号与制表符） */
+code,
+pre,
+kbd,
+samp,
+.chroma {
+    font-family: var(--font-code);
+    font-variant-ligatures: contextual;
+}
