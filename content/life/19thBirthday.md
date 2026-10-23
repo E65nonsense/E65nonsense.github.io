@@ -44,7 +44,7 @@ title = '祝我生日快乐！'
     title = "小酒窝拿了 MVP ，是在是太厉害了！" >}}
 
 {{< figure
-    src   = "/images/MVP.jpg"
+    src   = "/images/pudding.jpg"
     align = "center"
     width = 360
     title = "还有超级美味的焦糖布丁😋" >}}
