@@ -49,6 +49,12 @@ title = '祝我生日快乐！'
     width = 360
     title = "还有超级美味的焦糖布丁😋" >}}
 
+{{< figure
+    src   = "/images/peachCan.jpg"
+    align = "center"
+    width = 360
+    title = "差点忘了中午训练完吃了一整罐黄桃罐头！" >}}
+
 总之和小酒窝一起度过的生日就是很幸福呀很美妙呀
 
 真的是已经鼻子酸酸，眼睛汪汪！
