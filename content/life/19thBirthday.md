@@ -41,7 +41,7 @@ title = '祝我生日快乐！'
     src   = "/images/MVP.jpg"
     align = "center"
     width = 360
-    title = "小酒窝拿了 MVP ，是在是太厉害了！" >}}
+    title = "小酒窝拿了 MVP ，实在是太厉害了！" >}}
 
 {{< figure
     src   = "/images/pudding.jpg"
